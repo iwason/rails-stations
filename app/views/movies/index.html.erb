@@ -1,0 +1,87 @@
+<h1>映画一覧</h1>
+
+<div class="movies-container">
+    <% @movies.each do |movie| %>
+      <div class="movie-card">
+        <div class="movie-image">
+          <img src="<%= movie.image_url || "https://picsum.photos/200/300?random=#{movie.id}" %>" 
+               alt="<%= movie.name %>"
+               class="movie-poster">
+      </div>
+      <div class="movie-info">
+        <h2><%= movie.name %></h2>
+        <% if movie.year.present? %>
+          <p class="movie-year">公開年: <%= movie.year %></p>
+        <% end %>
+        <% if movie.description.present? %>
+          <p class="movie-description"><%= movie.description %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+   <% if @movies.empty? %>
+     <p>映画が見つかりませんでした。</p>
+   <% end %>
+</div>
+
+<style>
+  .movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .movie-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .movie-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background-color: #f0f0f0;
+  }
+
+  .movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .movie-info {
+    padding: 15px;
+  }
+
+  .movie-info h2 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+  }
+
+  .movie-year {
+    font-size: 12px;
+    color: #666;
+    margin: 5px 0;
+  }
+
+  .movie-description {
+    font-size: 13px;
+    color: #999;
+    margin: 5px 0 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+</style>
