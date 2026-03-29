@@ -1,0 +1,36 @@
+<%= form_with(model: [:admin, movie], class: "movie-form") do |form| %>
+  <% if movie.errors.any? %>
+    <div class="error">
+      <% movie.errors.each do |error| %>
+        <div><%= error.message %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, "タイトル", class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :year, "公開年", class: "form-label" %>
+    <%= form.number_field :year, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, "概要", class: "form-label" %>
+    <%= form.text_area :description, rows: 4, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image_url, "画像URL", class: "form-label" %>
+    <%= form.url_field :image_url, class: "form-control" %>
+  </div>
+
+  <div class="form-group form-group--checkbox">
+    <%= form.check_box :is_showing, class: "form-checkbox" %>
+    <%= form.label :is_showing, "上映中", class: "form-label" %>
+  </div>
+
+  <%= form.submit movie.persisted? ? "更新" : "登録", class: "btn" %>
+<% end %>

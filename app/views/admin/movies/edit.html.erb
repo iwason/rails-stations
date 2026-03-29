@@ -1,0 +1,7 @@
+<h1>映画編集</h1>
+
+<%= render "form", movie: @movie %>
+
+<%= button_to "削除", admin_movie_path(@movie), method: :delete,
+    form: { onsubmit: "return confirm('本当に削除しますか？')" },
+    class: "btn btn-danger" %>

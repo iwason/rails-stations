@@ -8,6 +8,8 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: user
       MYSQL_PASSWORD: user
+      MYSQL_ROOT_HOST: '%'           # 追加
+    command: --require_secure_transport=OFF  # 追加
     ports:
       - "3306:3306"
     volumes:

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>App</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <div class="layout admin-layout">
+      <aside class="side-nav" role="navigation" aria-label="メインナビ">
+        <div class="side-nav__brand">
+          <h1>管理画面</h1>
+        </div>
+        <ul>
+          <li class="<%= 'active' if current_page?(admin_movies_path) %>">
+            <%= link_to '映画一覧', admin_movies_path %>
+          </li>
+        </ul>
+      </aside>
+      <main class="content">
+        <%= yield %>
+      </main>
+    </div>
+
+  </body>
+</html>
+
