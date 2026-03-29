@@ -1,0 +1,36 @@
+<div class="movie-show">
+  <div class="movie-show__main">
+    <div class="movie-show__poster">
+      <%= image_tag @movie.image_url.presence || "https://picsum.photos/400/600?random=#{@movie.id}", alt: @movie.name, class: "movie-show__img" %>
+    </div>
+    <div class="movie-show__info">
+      <div class="movie-show__title-row">
+        <span class="movie-show__badge <%= @movie.showing? ? 'badge--showing' : 'badge--upcoming' %>">
+          <%= @movie.showing? ? "公開中" : "公開予定" %>
+        </span>
+        <h1 class="movie-show__title"><%= @movie.name %></h1>
+      </div>
+      <div class="movie-show__meta">
+        <%= @movie.year %>年
+      </div>
+      <div class="movie-show__description">
+        <%= @movie.description %>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-show__schedules">
+    <h2 class="schedules__heading">上映スケジュール</h2>
+    <% if @schedules.any? %>
+      <ul class="schedules__list">
+        <% @schedules.each do |schedule| %>
+          <li class="schedules__item">
+            <%= schedule.start_time.strftime("%H:%M") %>〜<%= schedule.end_time.strftime("%H:%M") %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="schedules__empty">上映スケジュールはありません。</p>
+    <% end %>
+  </div>
+</div>

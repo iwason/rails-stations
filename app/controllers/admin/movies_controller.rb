@@ -16,7 +16,7 @@ class Admin::MoviesController < ApplicationController
   def edit
   end
 
-  def destroy 
+  def destroy
     @movie.destroy
 
     redirect_to admin_movies_url, notice: "映画を削除しました。"

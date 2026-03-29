@@ -7,4 +7,9 @@ class MoviesController < ApplicationController
       @movies = @movies.where("name LIKE ? OR description LIKE ?", keyword, keyword)
     end
   end
+
+  def show
+    @movie = Movie.includes(:schedules).find(params[:id])
+    @schedules = @movie.schedules
+  end
 end

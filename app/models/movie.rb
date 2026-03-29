@@ -16,6 +16,7 @@
 #  index_movies_on_name  (name)
 #
 class Movie < ApplicationRecord
+  has_many :schedules
   validates :name, presence: { message: "映画名は必須です" }, uniqueness: { message: "同じ映画名は登録できません" }
   validates :is_showing, inclusion: { in: [ true, false ] }
 

@@ -1,0 +1,26 @@
+<div class="sheet-wrapper">
+  <div class="screen">スクリーン1</div>
+
+  <table class="sheet-table">
+    <thead>
+      <tr>
+        <th></th>
+        <% (1..5).each do |col| %>
+          <th class="col-label"><%= col %></th>
+        <% end %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sheets_by_row.each do |row, sheets| %>
+        <tr>
+          <td class="row-label"><%= row.upcase %></td>
+          <% sheets.each do |sheet| %>
+            <td class="seat"><%= "#{sheet.column}-#{sheet.row}" %></td>
+          <% end %>
+          <td class="row-label"><%= row.upcase %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
