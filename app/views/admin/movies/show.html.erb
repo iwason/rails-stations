@@ -1,25 +1,74 @@
 <h1>映画詳細</h1>
 
 <div>
-<table>
-  <tbody>
+  <table class="movie-table">
+    <tbody>
+      <tr>
         <th>ID</th>
-          <td><%= @movie.id %></td>
+        <td><%= @movie.id %></td>
+      </tr>
+      <tr>
         <th>タイトル</th>
-          <td><%= @movie.name %></td>
+        <td><%= @movie.name %></td>
+      </tr>
+      <tr>
         <th>公開年</th>
-          <td><%= @movie.year%></td>
+        <td><%= @movie.year %></td>
+      </tr>
+      <tr>
         <th>概要</th>
-          <td><%= @movie.description %></td>
+        <td><%= @movie.description %></td>
+      </tr>
+      <tr>
         <th>画像URL</th>
-          <td><%= link_to '画像', @movie.image_url, target: '_blank', rel: 'noopener noreferrer' %></td>
+        <td><%= link_to '画像', @movie.image_url, target: '_blank', rel: 'noopener noreferrer' %></td>
+      </tr>
+      <tr>
         <th>上映中</th>
-          <td><%= @movie.showing? ? '上映中' : '上映予定' %></td>
+        <td><%= @movie.showing? ? '上映中' : '上映予定' %></td>
+      </tr>
+      <tr>
         <th>登録日時</th>
-          <td><%= @movie.created_at %></td>
+        <td><%= @movie.created_at %></td>
+      </tr>
+      <tr>
         <th>更新日時</th>
-          <td><%= @movie.updated_at %></td>
-  </tbody>
-</table>
+        <td><%= @movie.updated_at %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
+<div class="movie-schedules">
+  <div class="movie-schedules__header">
+    <h2>上映スケジュール</h2>
+    <%= link_to "+ NEW", new_admin_movie_schedule_path(@movie), class: "btn btn-warning" %>
+  </div>
+
+  <% if @movie.schedules.any? %>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>開始時間</th>
+          <th>終了時間</th>
+          <th>作成日時</th>
+          <th>更新日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @movie.schedules.each do |schedule| %>
+          <tr>
+            <td><%= link_to schedule.id, edit_admin_movie_schedule_path(@movie, schedule) %></td>
+            <td><%= schedule.start_time %></td>
+            <td><%= schedule.end_time %></td>
+            <td><%= schedule.created_at %></td>
+            <td><%= schedule.updated_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>スケジュールはありません。</p>
+  <% end %>
 </div>

@@ -18,6 +18,9 @@
           <li class="<%= 'active' if current_page?(admin_movies_path) %>">
             <%= link_to '映画一覧', admin_movies_path %>
           </li>
+          <li class="<%= 'active' if current_page?(admin_schedules_path) %>">
+            <%= link_to '上映一覧', admin_schedules_path %>
+          </li>
         </ul>
       </aside>
       <main class="content">

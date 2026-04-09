@@ -75,8 +75,53 @@
   margin-bottom: 1rem;
 }
 
-.admin-movies h2 {
+.admin-movies h2,
+.admin-schedules h1 {
   margin-bottom: 16px;
+}
+
+.admin-schedules__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.movie-schedules {
+  margin-top: 32px;
+}
+
+.movie-schedules__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.movie-schedule-heading {
+  margin: 24px 0 8px;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  margin-bottom: 16px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.schedule-table th {
+  background: #f3f4f6;
+  color: #111827;
 }
 
 .movie-table {
@@ -96,6 +141,12 @@
 .movie-table th {
   background: #f3f4f6;
   color: #111827;
+}
+
+.movie-table img {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
 }
 
 .btn {
@@ -118,6 +169,14 @@
 
 .btn-primary:hover {
   background: #059669;
+}
+
+.btn-warning {
+  background: #d97706;
+}
+
+.btn-warning:hover {
+  background: #b45309;
 }
 
 .btn-danger {

@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :sheets, only: [ :index ]
 
   namespace :admin do
-    resources :movies
+    resources :movies do
+      resources :schedules, only: [ :new, :create, :edit, :update, :destroy ]
+    end
+    resources :schedules, only: [ :index, :show ]
   end
   # Defines the root path route ("/")
   # root "posts#index"

@@ -1,0 +1,30 @@
+<h1>スケジュール編集</h1>
+<h2><%= @movie.name %></h2>
+
+<%= form_with model: [:admin, @movie, @schedule], method: :patch, class: "movie-form" do |form| %>
+  <% if @schedule.errors.any? %>
+    <div class="error">
+      <% @schedule.errors.each do |error| %>
+        <div><%= error.message %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :start_time, "開始時刻", class: "form-label" %>
+    <%= form.time_field :start_time, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_time, "終了時刻", class: "form-label" %>
+    <%= form.time_field :end_time, class: "form-control" %>
+  </div>
+
+  <%= form.submit "更新", class: "btn" %>
+<% end %>
+
+<%= button_to "削除", admin_movie_schedule_path(@movie, @schedule), method: :delete,
+    form: { onsubmit: "return confirm('本当に削除しますか？')" },
+    class: "btn btn-danger" %>
+
+<%= link_to "戻る", admin_movie_path(@movie), class: "btn" %>

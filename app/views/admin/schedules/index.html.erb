@@ -1,0 +1,37 @@
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+
+<section class="admin-schedules">
+  <div class="admin-schedules__header">
+    <h1>上映一覧</h1>
+  </div>
+
+  <% @movies_with_schedules.each do |movie| %>
+    <h2 class="movie-schedule-heading"><%= movie.id %> <%= movie.name %></h2>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>映画名</th>
+          <th>開始時間</th>
+          <th>終了時間</th>
+          <th>作成日時</th>
+          <th>更新日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% movie.schedules.each do |schedule| %>
+          <tr>
+            <td><%= link_to schedule.id, admin_schedule_path(schedule) %></td>
+            <td><%= movie.name %></td>
+            <td><%= schedule.start_time %></td>
+            <td><%= schedule.end_time %></td>
+            <td><%= schedule.created_at %></td>
+            <td><%= schedule.updated_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</section>

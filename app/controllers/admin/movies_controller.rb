@@ -3,7 +3,7 @@ class Admin::MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
 
   def index
-    @movies = Movie.all
+    @movies = Movie.includes(:schedules).all
   end
 
   def new
@@ -51,6 +51,6 @@ class Admin::MoviesController < ApplicationController
     end
 
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = Movie.includes(:schedules).find(params[:id])
     end
 end
