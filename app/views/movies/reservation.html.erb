@@ -1,0 +1,37 @@
+<div class="sheet-wrapper">
+  <div class="screen">スクリーン1</div>
+  <% if flash[:alert] %>
+    <p class="alert"><%= flash[:alert] %></p>
+  <% end %>
+
+  <table class="sheet-table">
+    <thead>
+      <tr>
+        <th></th>
+        <% (1..5).each do |col| %>
+          <th class="col-label"><%= col %></th>
+        <% end %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sheets.group_by(&:row).each do |row, sheets| %>
+        <tr>
+          <td class="row-label"><%= row.upcase %></td>
+          <% sheets.each do |sheet| %>
+            <td class="seat">
+              <%= link_to "#{sheet.column}-#{sheet.row}",
+                new_movie_schedule_reservation_path(
+                  @movie,
+                  params[:schedule_id],
+                  date: params[:date],
+                  sheet_id: sheet.id
+                ) %>
+            </td>
+          <% end %>
+          <td class="row-label"><%= row.upcase %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

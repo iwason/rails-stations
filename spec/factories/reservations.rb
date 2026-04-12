@@ -27,7 +27,7 @@ FactoryBot.define do
     date { "2026-04-09" }
     schedule { nil }
     sheet { nil }
-    email { "MyString" }
-    name { "MyString" }
+    email { "test@example.com" }
+    name { "テストユーザー" }
   end
 end

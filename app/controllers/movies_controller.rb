@@ -12,4 +12,19 @@ class MoviesController < ApplicationController
     @movie = Movie.includes(:schedules).find(params[:id])
     @schedules = @movie.schedules
   end
+
+  def reservation
+    unless params[:date].present? && params[:schedule_id].present?
+      redirect_to movie_path(params[:id]) and return
+    end
+
+    @movie = Movie.find(params[:id])
+    @sheets = Sheet.order(:row, :column)
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:id , :name, :description, :is_showing)
+  end
 end

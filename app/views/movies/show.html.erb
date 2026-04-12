@@ -1,5 +1,9 @@
 <div class="movie-show">
   <div class="movie-show__main">
+      <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+  <% end %>
+
     <div class="movie-show__poster">
       <%= image_tag @movie.image_url.presence || "https://picsum.photos/400/600?random=#{@movie.id}", alt: @movie.name, class: "movie-show__img" %>
     </div>
@@ -22,13 +26,17 @@
   <div class="movie-show__schedules">
     <h2 class="schedules__heading">上映スケジュール</h2>
     <% if @schedules.any? %>
-      <ul class="schedules__list">
-        <% @schedules.each do |schedule| %>
-          <li class="schedules__item">
-            <%= schedule.start_time.strftime("%H:%M") %>〜<%= schedule.end_time.strftime("%H:%M") %>
-          </li>
-        <% end %>
-      </ul>
+      <%= form_with url: reservation_movie_path(@movie), method: :get, class: "reservation-form" do |f| %>
+        <div class="form-group">
+          <%= label_tag :date, "日付", class: "form-label" %>
+          <%= select_tag :date, options_for_select((0..7).map { |i| (Date.today + i).to_s }), class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :schedule_id, "上映時刻", class: "form-label" %>
+          <%= select_tag :schedule_id, options_for_select(@schedules.map { |s| ["#{s.start_time.strftime('%H:%M')}〜#{s.end_time.strftime('%H:%M')}", s.id] }), class: "form-control" %>
+        </div>
+        <%= submit_tag "座席を予約する", class: "btn" %>
+      <% end %>
     <% else %>
       <p class="schedules__empty">上映スケジュールはありません。</p>
     <% end %>
